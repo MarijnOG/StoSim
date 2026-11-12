@@ -498,6 +498,7 @@ if __name__ == "__main__":
         "Logistic: precise but biased\n"
         f"a bias={volume1_logistic - references['a']:+.3f}, "
         f"b bias={volume2_logistic - references['b']:+.3f}\n"
+        "Repeated runs: n=30\n"
         f"30-run SD: a={repeated_results['a', 'logistic'][:, 0].std(ddof=1):.3f}, "
         f"b={repeated_results['b', 'logistic'][:, 0].std(ddof=1):.3f}",
         transform=axes[2].transAxes,
@@ -589,6 +590,7 @@ if __name__ == "__main__":
         0.03,
         0.97,
         f"Reference volume = {reference3:.4f}\n"
+        "Repeated runs: n=30\n"
         f"p=0.2 weighted = {results[0.2][0]:.4f}\n"
         f"p=0.2 unweighted = {results[0.2][3]:.4f}",
         transform=axes[0].transAxes,
@@ -617,6 +619,15 @@ if __name__ == "__main__":
     axes[1].set_title("Variance comparison")
     axes[1].legend()
     fig.suptitle("Task 3b: the unweighted mixture is biased")
+    axes[1].text(
+        0.03,
+        0.97,
+        "Repeated runs per p: n=30",
+        transform=axes[1].transAxes,
+        va="top",
+        fontsize=8,
+        bbox={"facecolor": "white", "alpha": 0.8},
+    )
     fig.tight_layout()
     fig.savefig("task3_mixture_p_sweep.png", dpi=150)
     plt.close(fig)
@@ -732,7 +743,8 @@ if __name__ == "__main__":
         0.97,
         f"Final estimate = {mixture.estimate_integrand():.4f}\n"
         f"Unweighted estimate = {mixture.naive_estimate():.4f}\n"
-        f"Reference = {reference3:.4f}",
+        f"Reference = {reference3:.4f}\n"
+        "Single run: n=100000",
         transform=ax.transAxes,
         va="top",
         fontsize=8,
